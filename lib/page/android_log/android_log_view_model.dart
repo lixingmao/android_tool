@@ -5,6 +5,7 @@ import 'package:android_tool/page/common/app.dart';
 import 'package:android_tool/page/common/base_view_model.dart';
 import 'package:android_tool/page/common/package_help_mixin.dart';
 import 'package:android_tool/widget/pop_up_menu_button.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_list_view/flutter_list_view.dart';
@@ -276,6 +277,19 @@ class AndroidLogViewModel extends BaseViewModel with PackageHelpMixin {
 
   void copyLog(String log) {
     Clipboard.setData(ClipboardData(text: log));
+  }
+
+  void exportLog() async {
+    DateTime dt = DateTime.now();
+
+    var target =
+        await getSavePath(suggestedName: "${dt.millisecondsSinceEpoch}.log");
+    if (target == null) {
+      return;
+    }
+
+    var write = File(target).openWrite();
+    write.writeAll(logList, "\n");
   }
 
   void clearLog() {

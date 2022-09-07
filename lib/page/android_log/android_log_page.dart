@@ -162,6 +162,13 @@ class _AndroidLogPageState
               },
               child: const TextView("清除"),
             ),
+            const SizedBox(width: 12),
+            OutlinedButton(
+              onPressed: () {
+                viewModel.exportLog();
+              },
+              child: const TextView("导出"),
+            ),
             const SizedBox(width: 16),
           ],
         ),
