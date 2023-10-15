@@ -124,7 +124,7 @@ class AndroidLogViewModel extends BaseViewModel with PackageHelpMixin {
         if (filterContent.isNotEmpty
             ? line.toLowerCase().contains(filterContent.toLowerCase())
             : true) {
-          if (logList.length > 1000) {
+          if (logList.length > 100000) {
             logList.removeAt(0);
           }
           logList.add(line);
